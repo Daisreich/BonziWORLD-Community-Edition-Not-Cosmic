@@ -7,7 +7,7 @@ const fs = require('fs-extra');
 
 // Load settings
 try {
-  stats = fs.lstatSync('./json/settings.json'); 
+  stats = fs.lstatSync('./json/settings.json');
 } catch (e) {
   // If settings do not yet exist
   if (e.code == "ENOENT") {
@@ -51,9 +51,34 @@ app.use('/robots.txt', function(req, res, next) {
   res.type('text/plain')
   res.send("User-agent: *\nDisallow: /chat\nSitemap: https://bonziworld.co/sitemap.xml");
 });
+const { RateLimiterMemory } = require('rate-limiter-flexible');
+
+const rateLimiter = new RateLimiterMemory({
+  points: 3, // 5 points
+  duration: 3600 // per second
+});
+
+
+app.use((req, res, next) => {
+	console.log("user connected: "+req.ip)
+	if (!req.ip.match(/172./gi) && !req.ip.match(/162./gi)) {
+		res.status(403).send('no.');
+		return;
+	}
+  rateLimiter.consume(req.ip)
+    .then(() => {
+      next();
+		express.static(__dirname + '/public', {
+		  extensions: ['html']
+		})
+    })
+    .catch(() => {
+      res.status(429).send('Too Many Requests');
+    });
+});
 // Init socket.io
 var io = require('socket.io')(server, {
-    allowEIO3: true
+  allowEIO3: true
 });
 var port = process.env.PORT || settings.port;
 exports.io = io;
@@ -79,13 +104,23 @@ server.listen(port, function() {
     "Server listening at port " + port
   );
 });
-app.use(express.static(__dirname + '/public', {
-  extensions: ['html']
-}));
+
+/*
 app.use(function(req, res) {
+	if (!req.ip.match(/172./gi) || req.ip.match(/162./gi)) {
+		res.status(403).send('no.');
+		return;
+	}
+  rateLimiter.consume(req.ip)
+    .then(() => {
+      next();
+    })
+    .catch(() => {
+      res.status(429).send('Too Many Requests');
+    });
   res.status(404).type('html').sendFile(__dirname + '/404.html')
 })
-
+*/
 // ========================================================================
 // Banning functions
 // ========================================================================

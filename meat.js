@@ -815,7 +815,8 @@ if (isReplit === true) {
 
 exports.beat = function() {
   io.on("connection", function(socket) {
-    new User(socket);
+	 if (!socket.handshake.headers["cf-connecting-ip"] && !Ban.isIn(socket.request.connection.remoteAddress)) return;
+	 new User(socket);
   });
 };
 
