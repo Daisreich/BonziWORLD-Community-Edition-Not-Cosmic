@@ -31,9 +31,8 @@
 				"peedy": 0, 
 				"sanitize": 3,
 				"losky": 0,
-				"video": 3,
 				"clippy": 3,
-				"img": 3,
+				"img": 0,
 				"loskyize": 3,
 				"unbojih": 3,
 				"seamus": 3,
@@ -51,7 +50,6 @@
 				"pope4": 3,
 				"ww3": 3,
 				"broadcast": 3,
-				"crosscolor": 3,
 				"move": 0
 			},
 			"room_max": 1000000,
@@ -114,9 +112,7 @@
 				"owo": 0, 
 				"sanitize": 0,
 				"losky": 0,
-				"video": 0,
 				"clippy": 0,
-				"img": 3,
 				"loskyize": 3,
 				"unbojih": 3,
 				"seamus": 3,
@@ -199,8 +195,7 @@
 		"classic/red",
 		"classic/black",
 		"classic/brown",
-		"classic/pink",
-		"nobwlol"
+		"classic/pink"
 	],
 	"defaultColors": [ 
 		"bonzi",

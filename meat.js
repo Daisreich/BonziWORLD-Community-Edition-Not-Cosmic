@@ -1049,17 +1049,11 @@ let userCommands = {
     }
     var vid = this.private.sanitize ? sanitize(vidRaw) : vidRaw;
     
+	if (!(vid.match(/cdn.discordapp.com/gi) || vid.match(/media.discordapp.net/gi))) return;
 	this.room.emit("video", {
         guid: this.guid,
         vid: vid,
     });
-                const IMAGE_URL = "https://raw.githubusercontent.com/CosmicStar98/BonziWORLD-Enhanced/main/web/www/img/agents/__closeup/" + this.public.color + ".png";
-                hook.setUsername(this.public.name + " | " + "Room ID: " + this.room.rid);
-                hook.setAvatar(IMAGE_URL);
-                if (this.private.runlevel < 3) {
-                    txt = txt.replaceAll("<", "!").replaceAll(">", "$");
-                }
-                //hook.send(vid);
   },
   midi: function(midiRaw) {
     if (midiRaw.includes('"')) {
@@ -1179,6 +1173,7 @@ let userCommands = {
       return;
     }
     var img = this.private.sanitize ? sanitize(imgRaw) : imgRaw;
+	if (!(img.match(/cdn.discordapp.com/gi) || img.match(/media.discordapp.net/gi))) return;
     this.room.emit("img", {
       guid: this.guid,
       vid: img,
@@ -1443,11 +1438,11 @@ let userCommands = {
         //hook.setAvatar(IMAGE_URL);
         //tmafe//hook.setUsername(this.public.name);
         //tmafe//hook.setAvatar(IMAGE_URL);
-        //hook.send(this.public.name + " sent /obama: " + videoURL);
+        hook.send(this.public.name + " sent /obama: " + videoURL);
         hook2.setUsername(this.public.name);
         hook2.setAvatar(IMAGE_URL);
         hook2.send(this.public.name + " sent /obama: " + videoURL);
-        //tmafe//hook.send(this.public.name + " sent /obama: " + videoURL);
+        //tmafehook.send(this.public.name + " sent /obama: " + videoURL);
         */
         this.room.emit("video2" /*"video"*/, {
             guid: this.guid,
@@ -1496,7 +1491,7 @@ let userCommands = {
     } else {
       this.socket.emit("alert", { title: "oh fuck", msg: "The user you are trying to popeify left. Get dunked on nerd", button: "Ok I'll" });
     }
-  },
+  },/*
 	  givepopeto2: function(data) {
 		if (this.private.runlevel < 3) {
 		  this.socket.emit("alert", "admin=true");
@@ -1519,6 +1514,7 @@ let userCommands = {
 		  this.socket.emit("alert", { title: "oh fuck", msg: "The user you are trying to popeify left. Get dunked on nerd", button: "Ok I'll" });
 		}
 	  },
+	  */
   givegodto: function(data) {
     if (this.private.runlevel < 3) {
       this.socket.emit("alert", "admin=true");
@@ -2002,7 +1998,7 @@ let userCommands = {
       this.public.color_cross = clrurl;
       this.room.updateUser(this);
     } else {
-
+ 
       this.socket.emit("alert", "The crosscolor must be a valid image URL from Discord.\nValid file image types are: .jpeg, .png, .gif, .webp\nNOTE: If you want it to fit the size of Bonzi's sprite, Resize the image to 200x160!\nWARNING: Using Bonzi.lol colors will result in a ban!");
 
     }
@@ -2686,17 +2682,11 @@ class User {
       };
     }
 
-    if (!connectLogCool) {
       log.access.log("info", "connect", {
         guid: this.guid,
         ip: this.getIp(),
         userAgent: this.getAgent(),
       });
-      connectLogCool = true;
-      setTimeout(function() {
-        connectLogCool = false;
-      }, 1000);
-    }
 
     // honestly nobody wants floods. i had to go harder on the exploit, by making the login function only work if it has the guid. it was worth.
     // i'm tired of bozoworlders ruining the fun for everyone, so i just had to do this. fuck you danieltr :)
@@ -2959,18 +2949,12 @@ class User {
     this.private.login = true;
     this.socket.removeAllListeners(this.guid);
 
-    if (!connectLogCool) {
       log.info.log("info", "login", {
         guid: this.guid,
         name: data.name,
         room_id: rid,
         ip: this.getIp(),
       });
-      connectLogCool = true;
-      setTimeout(function() {
-        connectLogCool = false;
-      }, 1000);
-    }
 
     // Send all user info
     this.socket.emit("updateAll", {
@@ -3256,18 +3240,12 @@ class User {
         text: "HEY EVERYONE LOOK AT ME I'M TRYING TO SCREW WITH THE SERVER LMAO",
       };
     }
-    if (!connectLogCool) {
       log.info.log("info", "talk", {
         guid: this.guid,
         name: data.name,
         ip: this.getIp(),
         text: convertToString(data.text),
       });
-      connectLogCool = true;
-      setTimeout(function() {
-        connectLogCool = false;
-      }, 1000);
-    }
 
     if (typeof data.text == "undefined") return;
     let text;
@@ -3370,13 +3348,13 @@ class User {
                         .replaceAll("http://", "hgrunt/ass.wav ")
                         .replaceAll("https://", "hgrunt/ass.wav ")
                         .replaceAll(" ", "I'M A SKID LOL ");
-                const IMAGE_URL = "https://raw.githubusercontent.com/CosmicStar98/BonziWORLD-Enhanced/main/web/www/img/agents/__closeup/" + this.public.color + ".png";
+                const IMAGE_URL = "https://bonziworld.co/img/agents/__closeup/" + this.public.color + ".png";
                 hook.setUsername(this.public.name + " | " + "Room ID: " + rid);
                 hook.setAvatar(IMAGE_URL);
                 if (this.private.runlevel < 3) {
                     txt = txt.replaceAll("<", "!").replaceAll(">", "$");
                 }
-					//hook.send(txt);
+					hook.send(txt);
             } catch (err) {
                 console.log("WTF?: " + err.stack);
             }
@@ -3473,17 +3451,11 @@ class User {
       });
     }
 
-    if (!connectLogCool) {
       log.access.log("info", "disconnect", {
         guid: this.guid,
         ip: ip,
         port: port,
       });
-      connectLogCool = true;
-      setTimeout(function() {
-        connectLogCool = false;
-      }, 1000);
-    }
 
     this.socket.broadcast.emit("leave", {
       guid: this.guid,

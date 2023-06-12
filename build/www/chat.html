@@ -320,20 +320,12 @@
                 <div id="login_headline" style="display: block;">
 					Having problems with the site? CTRL+SHIFT+R or Clear site cache!
 					<br>
-					Under attack mode activated: You may encounter issues
-					<br>
-					Important Note: At 1 AM, this site temporarily goes offline until I wake up. If this doesn't happen, it means I wasn't caught leaving the PC on at midnight.
-					<br>
-					If bonzi.lol tries to nuke the site, This site may require captcha verification.
-					<br>
-					Fune, Hunge hugo (danieltr52) and ItzChrisNo1 (InspectElement/Ziggymoncher/Zigga) have an unhealthy obsession with me, just like they do with CP and the concept of grooming. Bonzi.lol ddossing back and their admins having the ability to Leak IPs proves that the site is a IP grabber.
+					ALERT: Rules are back. Follow them or else you will be punished.
 				</div>
                 <div id="login_readme" style="display: none;">
-                    Make sure you read the <a href="readme" target="_blank">README</a> before use.
+                    Make sure you read the <a href="javascript:window.open('https://bonziworld.co/readme/','readme','popup,menubar=no')">README</a> and <a href="javascript:window.open('https://bonziworld.co/rules/','rules','popup,menubar=no')">RULES</a> before use.
 					<hr>
-					<a href="misc">Miscellaneous Links</a> <a href="https://discord.gg/PD9Tbr7Efh">Discord Server</a> <a href="./lite/">BonziWORLD CE Lite</a>
-					<br>
-					NEW MILESTONE: We've (almost) reached 20 users in the room id 'default'!
+					<a href="javascript:window.open('./misc','misc','popup,menubar=no')">Miscellaneous Links</a> <a href="./lite/">BonziWORLD CE Lite</a>
 				</div>
                 <div id="login_load">loading... <img id="loading_cursor" src="./img/cursors/hourglas.gif"></div>
                 <div id="recaptcha_verify" class="g-recaptcha" data-sitekey="6Len81UkAAAAANyLdzauK4uOSNvwOBWL9BwBcDU0" data-callback="onSubmit" data-size="invisible"></div>
@@ -352,7 +344,7 @@
 							<input id="login_room2" type="text" placeholder="Room ID (Optional)">
 						</div>
 						<button id="login_go2" class="g-recaptcha" data-sitekey="6Len81UkAAAAANyLdzauK4uOSNvwOBWL9BwBcDU0" data-callback="onSuccess">Sign In</button>
-						<p id="use_guide">Make sure to check out the <a id="readme" href="readme.html" target="_blank">README</a> before use.</p>
+						<p id="use_guide">Make sure to check out the <a id="readme" href="javascript:window.open('./readme', 'readme', 'popup')" target="_blank">README</a> before use.</p>
 					</div>    			
 				</div>
                 <div id="login_card" style="display: none;">
@@ -368,7 +360,7 @@
 						<option value="poland"></option>
 						<option value="pope"></option>
                     </datalist>
-                    <button id="login_go_button" class="g-recaptcha" data-sitekey="6Len81UkAAAAANyLdzauK4uOSNvwOBWL9BwBcDU0" data-callback="onSuccess" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;">
+                    <button id="login_go_button" onclick="loadTest()" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;">
                         <div id="login_go"></div>
                     </button>
                     <br />
@@ -379,7 +371,7 @@
                     <div id="login_error" style="display: none;"></div>
                     <br />
                 </div>
-            </div>
+            </div>	
         </div>
             <div id="page_dm" class="message_cont" style="display: none;">
                 <h1>Message <span id="dm_send_to"></span></h1>

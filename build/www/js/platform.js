@@ -3,12 +3,12 @@ var isApp = false;
 var isDesktop = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i) == null;
 
 var isChromeBrowser = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-var urlChrome = "https://chrome.google.com/webstore/detail/bonziworld/mbmkblgjegkiaggajjiheicbmfjaldcf";
+var urlChrome = "javascript:window.open('https://chrome.google.com/webstore/detail/bonziworld/mbmkblgjegkiaggajjiheicbmfjaldcf','chrome','popup')";
 
 var isiOS = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)/i) != null;
 var urlGPlay = "https://play.google.com/store/apps/details?id=com.jojudge.bonziworld";
-var urlSteamGroup = "https://steamcommunity.com/groups/SEAMSERVER";
-var urlAmazonStore = "https://www.amazon.com/dp/B0C38B8J8G/";
+var urlSteamGroup = "javascript:window.open('https://steamcommunity.com/groups/BZWCE','steam','popup')";
+var urlAmazonStore = "javascript:window.open('https://www.amazon.com/dp/B0C38B8J8G/','amazon','popup')";
 
 // Get the voice select element.
 var voiceSelect = document.getElementById('voice');
@@ -34,12 +34,18 @@ $(function() {
 				"<li>" + obj.message + "</li>"
 			);
 	}
-	
+	/*
 	 $(".app_showcase").append(
 	 	'<img src="./img/app/pope_info.png" alt="Popes are better and way less meaner than before!" width=211/>'
 	 );
 	 $(".app_showcase").append(
 	 	'<img src="./img/app/bonzico_friendly.png" alt="99.9% more civil and friendly than bonzi.lol!" width=211/>'
+	 );
+	 */
+	 $(".app_showcase").append(
+	 	'<a class="app_steam" href="' + urlSteamGroup + '">' +
+			'<img src="./img/app/steam.png" alt="Join the Steam Group!" width=211/>' +
+		'</a>'
 	 );
 	if (!supported) {
 		$("#page_unsupp").show();

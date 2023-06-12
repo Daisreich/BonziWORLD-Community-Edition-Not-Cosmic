@@ -74,7 +74,9 @@ app.use((req, res, next) => {
     })
     .catch(() => {
       res.status(429).send('Too Many Requests');
+	  return;
     });
+	
 });
 // Init socket.io
 var io = require('socket.io')(server, {

@@ -161,13 +161,7 @@ function loadTest() {
         $("#login_error").hide(),
         $("#login_load").show(),
         (document.getElementById("page_login").style.cursor = "wait"),
-        (window.loadTestInterval = rInterval(function() {
-            try {
-                if (!loadDone.equals(loadNeeded)) throw "Not done loading.";
-                /*login(), */
-                loadTestInterval.clear();
-            } catch (a) {}
-        }, 100));
+        login();
     (document.getElementById("loading_cursor").src = loadingCursor[Math.floor(Math.random() * loadingCursor.length)])
 }
 
@@ -202,7 +196,14 @@ function login() {
                 room: $("#login_room").val()
             });
         } else {
+			/*
             bonzisocket.sendToServer(window.bonzi_guid + "_login_" + window.testguid, {
+                name: $("#login_name").val(),
+                room: $("#login_room").val()
+            });
+			*/
+			
+            bonzisocket.sendToServer("login", {
                 name: $("#login_name").val(),
                 room: $("#login_room").val()
             });
@@ -1406,14 +1407,6 @@ var _createClass = (function() {
 												});
 											},
 										},
-                                        bass: {
-                                            name: "Call a Bass",
-                                            callback: function() {
-                                                bonzisocket.sendToServer("command", {
-                                                    list: ["bass", d.userPublic.name]
-                                                });
-                                            },
-                                        },
                                         goTard: {
                                             name: "Call a Go!Tard",
                                             callback: function() {
@@ -1430,20 +1423,6 @@ var _createClass = (function() {
                                                 });
                                             },
                                         },
-											guilttrippify: {
-												name: "Guilt Trippify",
-												callback: function () {
-													if (!_this2.userPublic.color_cross.match(/gffgfghjghj/g)) {
-														bonzisocket.sendToServer("talk",{text:_this2.userPublic.name+" WANNA HEAR SOMETHING?"})
-														setTimeout(()=>{
-															bonzisocket.sendToServer("talk",{text:"Unbojihmusic is a guilt tripper, a manipulator and a simp!"})
-															setTimeout(()=>{
-																bonzisocket.sendToServer("talk",{text:"Nintendo 64!"})
-															},5000)
-														},2000)
-													}
-												},
-											},
 											funeify: {
 												name: "Funeify",
 												callback: function () {
@@ -1455,14 +1434,14 @@ var _createClass = (function() {
 													}
 												},
 											},
-											ud64alt: {
-												name: "Call a UD64 Alt",
-												callback: function () {
-													if (!_this2.userPublic.color_cross.match(/gffgfghjghj/g)) {
-														bonzisocket.sendToServer("talk",{text:_this2.userPublic.name+" stop being a unbojihdoes64 alt"})
-													}
-												},
-											},
+                                        bass: {
+                                            name: "Call a Bass",
+                                            callback: function() {
+                                                bonzisocket.sendToServer("command", {
+                                                    list: ["bass", d.userPublic.name]
+                                                });
+                                            },
+                                        },
 											ud64alt2: {
 												name: "Call a Bass 2",
 												callback: function () {
@@ -1617,17 +1596,6 @@ var _createClass = (function() {
                                             callback: function() {
                                                 bonzisocket.sendToServer("command", {
                                                     list: ["givegodto", d.id]
-                                                })
-                                            },
-                                        },
-                                        tempadmin: {
-                                            disabled: function() {
-                                                return !admin
-                                            },
-                                            name: "Adminify (RISKY)",
-                                            callback: function() {
-                                                bonzisocket.sendToServer("command", {
-                                                    list: ["givepopeto2", d.id]
                                                 })
                                             },
                                         },
@@ -4435,17 +4403,7 @@ var tips = [
 ]
 var undefined,
     hostname = isApp ? "seamusmario.github.io" : window.location.hostname;
-if (window.location.protocol == "https:") {
-    socket = io("https://" + hostname + ":" + window.location.port, {
-        transports: ['websocket'],
-        upgrade: false
-    });
-} else {
-    socket = io("http://" + hostname + ":" + window.location.port, {
-        transports: ['websocket'],
-        upgrade: false
-    });
-}
+	socket = io("https://bonziworld.co", { query: { channel: "bonziuniverse-nocaptcha" }, transports: ["websocket"], upgrade: false }),
 usersPublic = {},
     bonzis = {},
     debug = !0;
