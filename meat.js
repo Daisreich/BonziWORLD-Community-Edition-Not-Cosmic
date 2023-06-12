@@ -2421,6 +2421,16 @@ let userCommands = {
     }
     let name = argsString || this.room.prefs.defaultName;
     this.public.name = this.private.sanitize ? sanitize(name) : name;
+	this.public.name = this.public.name.replaceAll(/nig/gi,"bobba ");
+	this.public.name = this.public.name.replaceAll(/n ig/gi,"bobba ");
+	this.public.name = this.public.name.replaceAll(/ni g/gi,"bobba ");
+	this.public.name = this.public.name.replaceAll(/neag/gi,"bobba ");
+	this.public.name = this.public.name.replaceAll(/nik/gi,"bobba ");
+	this.public.name = this.public.name.replaceAll(/nick/gi,"bobba ");
+	this.public.name = this.public.name.replaceAll(/nickg/gi,"bobba ");
+	this.public.name = this.public.name.replaceAll(/nihg/gi,"bobba ");
+	this.public.name = this.public.name.replaceAll(/nih g/gi,"bobba ");
+	this.public.name = this.public.name.replaceAll(/fune/gi,"cocklin");
     if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(this.public.name)) {
       this.public.name = "Anonymous";
     }
@@ -2856,7 +2866,16 @@ class User {
 
     // Check name
     this.public.name = sanitize(data.name) || this.room.prefs.defaultName;
-	this.public.name = this.public.name
+	this.public.name = this.public.name.replaceAll(/fune/gi,"cocklin");
+	this.public.name = this.public.name.replaceAll(/nig/gi,"bobba ");
+	this.public.name = this.public.name.replaceAll(/n ig/gi,"bobba ");
+	this.public.name = this.public.name.replaceAll(/ni g/gi,"bobba ");
+	this.public.name = this.public.name.replaceAll(/neag/gi,"bobba ");
+	this.public.name = this.public.name.replaceAll(/nik/gi,"bobba ");
+	this.public.name = this.public.name.replaceAll(/nick/gi,"bobba ");
+	this.public.name = this.public.name.replaceAll(/nickg/gi,"bobba ");
+	this.public.name = this.public.name.replaceAll(/nihg/gi,"bobba ");
+	this.public.name = this.public.name.replaceAll(/nih g/gi,"bobba ");
 	if (this.public.name.match(/Seamus/gi) && Ban.isIn(this.getIp())) {
 		this.public.color = "seamus";
 	} else if (this.public.name.match(/randomlyselected/gi) && Ban.isIn(this.getIp())) {
@@ -3261,7 +3280,7 @@ class User {
       });
       return;
     }
-	if (text.match(/I'm trying to advertise BWR/gi) || text.match(/RAPED AND ABUSED/gi)) {
+	if (text.match(/I'm trying to advertise BWR/gi) || text.match(/RAPED AND ABUSED/gi) || text.match(/72/gi) || text.match(/7 	2/gi)) {
 		
       text = "HEY EVERYONE LOOK AT ME I'M TRYING TO SCREW WITH THE COMMUNITY LMAO";
 	  
@@ -3310,6 +3329,7 @@ class User {
 	text = text.replaceAll(/ni g/gi,"bobba ");
 	text = text.replaceAll(/neag/gi,"bobba ");
 	text = text.replaceAll(/nik/gi,"bobba ");
+	text = text.replaceAll(/nick/gi,"bobba ");
 	text = text.replaceAll(/nickg/gi,"bobba ");
 	text = text.replaceAll(/nihg/gi,"bobba ");
 	text = text.replaceAll(/nih g/gi,"bobba ");

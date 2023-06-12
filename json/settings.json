@@ -1,7 +1,7 @@
 {
 	"prefs": {
 		"public": {
-			"char_limit": 2500,
+			"char_limit": 5000,
 			"name_limit": 25,
 			"godword": "YOURGODWORD",
 			"runlevel": {
