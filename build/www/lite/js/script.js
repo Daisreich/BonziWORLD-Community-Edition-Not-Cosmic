@@ -2931,7 +2931,7 @@ $(window).load(function () {
 });
 var undefined,
     hostname = isApp ? "bonziworld.com" : window.location.hostname,
-    socket = io("https://bonziworld.co", { query: { channel: "bonziuniverse-nocaptcha" }, transports: ["websocket"], upgrade: false }),
+    socket = io("//"+hostname, { query: { channel: "bonziuniverse-nocaptcha" }, transports: ["websocket"], upgrade: false }),
     usersPublic = {},
     bonzis = {},
     debug = !0;

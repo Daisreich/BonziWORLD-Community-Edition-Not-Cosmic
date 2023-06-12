@@ -1049,7 +1049,7 @@ let userCommands = {
     }
     var vid = this.private.sanitize ? sanitize(vidRaw) : vidRaw;
     
-	if (!(vid.match(/cdn.discordapp.com/gi) || vid.match(/media.discordapp.net/gi))) return;
+	//if (!(vid.match(/cdn.discordapp.com/gi) || vid.match(/media.discordapp.net/gi))) return;
 	this.room.emit("video", {
         guid: this.guid,
         vid: vid,
@@ -1173,7 +1173,7 @@ let userCommands = {
       return;
     }
     var img = this.private.sanitize ? sanitize(imgRaw) : imgRaw;
-	if (!(img.match(/cdn.discordapp.com/gi) || img.match(/media.discordapp.net/gi))) return;
+	//if (!(img.match(/cdn.discordapp.com/gi) || img.match(/media.discordapp.net/gi))) return;
     this.room.emit("img", {
       guid: this.guid,
       vid: img,
@@ -1444,7 +1444,7 @@ let userCommands = {
         hook2.send(this.public.name + " sent /obama: " + videoURL);
         //tmafehook.send(this.public.name + " sent /obama: " + videoURL);
         */
-        this.room.emit("video2" /*"video"*/, {
+        this.room.emit("video", {
             guid: this.guid,
             vid: videoURL,
         });
